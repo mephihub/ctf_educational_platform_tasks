@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: Simple one
+  author: C3n1t3lb
+host-data:
+  type: local
+  flag: flag{s1mpl3_0n3}
+  
