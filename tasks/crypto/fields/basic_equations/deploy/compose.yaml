@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  basic_equations:
+    build: .
+    ports:
+      - "50005:1337"
+    restart: unless-stopped

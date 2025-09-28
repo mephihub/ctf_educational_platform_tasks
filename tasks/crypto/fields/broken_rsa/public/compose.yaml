@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  broken_rsa:
+    build: .
+    ports:
+      - "50001:1337"
+    restart: unless-stopped

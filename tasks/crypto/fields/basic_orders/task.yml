@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: Basic Orders
+  author: defkit
+host-data:
+  type: remote
+  flag: flag{5ce694cd6eddfab44a571260a939970c}
+  

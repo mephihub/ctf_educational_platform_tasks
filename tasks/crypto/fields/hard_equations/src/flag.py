@@ -1,0 +1,1 @@
+FLAG = b'flag{79ac3b94548b5ea4f08439a0c3dfbaef}'
