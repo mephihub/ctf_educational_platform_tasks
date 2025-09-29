@@ -1,0 +1,10 @@
+services:
+  task:
+    build: ./app
+    container_name: simple_one
+    ports: 1337:1337
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
+    environment:
+      FLAG: "1234"

@@ -15,8 +15,9 @@ from threading import Lock, current_thread
 DC_REQUIRED_OPTIONS = ["services"]
 DC_ALLOWED_OPTIONS = DC_REQUIRED_OPTIONS + ["volumes", "version"]
 
-CONTAINER_REQUIRED_OPTIONS = ["restart", "container_name"]
+CONTAINER_REQUIRED_OPTIONS = ["container_name"]
 CONTAINER_ALLOWED_OPTIONS = [
+    "container_name",
     "restart",
     "pids_limit",
     "mem_limit",
@@ -31,7 +32,7 @@ CONTAINER_ALLOWED_OPTIONS = [
     "depends_on",
     "sysctls",
     "security_opt",
-
+    "privilleged",
     "read_only",
     "tmpfs",
     "cap_drop",
@@ -127,18 +128,20 @@ class Task(BaseValidator):
             task_conf = yaml.safe_load(f)
         for key in REQUIRED_TASK_KEYS:
             if self._error(key in task_conf.keys(), f"required key {key} not in task.yml"):
-                return 0
-        if self._error(type(task_conf['description']) != list, 'description should be dictionary') or self._error(type(task_conf['host-data']) != list, 'host-data should be dictionary'):
-            return 0
+                exit(1)
+        if self._error(type(task_conf['description']) == dict, 'description should be dictionary') or self._error(type(task_conf['host-data']) != list, 'host-data should be dictionary'):
+            exit(1)
         for key in REQUIRED_DESC_KEYS:
             if self._error(key in task_conf['description'].keys(), f"required key {key} not in task.yml"):
-                return 0
+                exit(1)
         for key in REQUIRED_HOST_DATA_KEYS:
             if self._error(key in task_conf['host-data'].keys(), f"required key {key} not in task.yml"):
-                return 0
+                exit(1)
         if task_conf['host-data']['type'] == 'remote':
-            if self._error((self._task.path / 'deploy').exists(), 'No deploy directory for remote task'):
-                return 0
+            if self._error((self._path / 'deploy').exists(), 'No deploy directory for remote task') or \
+                self._error(task_conf['host-data'].get('timeout') != None , "No timeout option in host-data for instance"):
+                exit(1)
+        
         self.task_conf = task_conf
 
     @property
@@ -196,7 +199,7 @@ class StructureValidator(BaseValidator):
         self._error(f.name != ".gitkeep", f"{path} found, should be named .keep")
 
         if f.name == "docker-compose.yml":
-            if not self._warning(self.task_conf['host-data']['type'] == 'local', 'You have docker-compose.yml but your task is local'):
+            if not self._warning(self.task_conf['host-data']['type'] == 'remote', 'You have docker-compose.yml but your task is local'):
                 with f.open() as file:
                     dc = yaml.safe_load(file)
 
@@ -254,12 +257,6 @@ class StructureValidator(BaseValidator):
                                 opt in container_conf,
                                 f"required option {opt} not in {path} for container {container}",
                             )
-
-                        self._error(
-                            "restart" in container_conf
-                            and container_conf["restart"] == "unless-stopped",
-                            f'restart option in {path} for container {container} must be equal to "unless-stopped"',
-                        )
 
                         for opt in container_conf:
                             self._error(
