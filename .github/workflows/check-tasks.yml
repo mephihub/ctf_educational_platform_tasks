@@ -2,13 +2,9 @@ name: check-tasks
 
 on:
   push:
-    branches:
-    - master
-    - testing
+    branches: [main]
   pull_request:
-    branches:
-    - master
-    - testing
+    branches: [main]
 jobs:
   list-tasks:
     runs-on: ubuntu-latest
