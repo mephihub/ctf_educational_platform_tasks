@@ -1,5 +1,5 @@
 # jeopardy_ctf_template
-[![check-tasks](https://github.com/dtlhub/ctf_educational_platform/actions/workflows/check-tasks.yml/badge.svg?branch=master&event=push)](https://github.com/dtlhub/ctf_educational_platform/actions/workflows/check-tasks.yml)
+[![check-tasks](https://github.com/mephihub/ctf_educational_platform_tasks/actions/workflows/check-tasks.yml/badge.svg)](https://github.com/mephihub/ctf_educational_platform_tasks/actions/workflows/check-tasks.yml)
 
 Development workflow:
 
