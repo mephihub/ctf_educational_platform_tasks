@@ -2,7 +2,7 @@ description:
   difficulty: easy
   name: Simple one(remote)
   author: C3n1t3lb
-host-data:
+hest-data:
   type: remote
   timeout: 60000 # В миллисекундах сколько давать время на инстанс
   flag: flag{s1mpl3_0n3}
