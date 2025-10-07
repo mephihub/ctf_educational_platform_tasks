@@ -57,4 +57,10 @@ jobs:
       run: ./checker.py validate
       env:
         TASK: ${{ matrix.task }}
+        
+  report-success:
+    needs: check-task
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All tasks validated successfully"
     
