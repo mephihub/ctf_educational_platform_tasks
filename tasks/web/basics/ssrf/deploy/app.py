@@ -8,7 +8,7 @@ BASE = Path(__file__).parent.resolve()
 DB_PATH = BASE / "ssrf_demo.db"
 
 app = Flask(__name__)
-app.secret_key = "dev-secret-change-me"
+app.secret_key = "3718b545b81cc41cb863bf6b97c695a8"
 
 # ---- DB helpers ----
 def get_db():

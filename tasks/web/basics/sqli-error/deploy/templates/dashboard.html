@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card card-pleasant p-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3>Привет, {{ user.username }} 👋</h3>
+          <p class="small-muted">
+            Это ваша личная панель. 
+          </p>
+        </div>
+        <div>
+          <a class="btn btn-outline-secondary" href="{{ url_for('profile') }}"
+            >Профиль</a
+          >
+          <a class="btn btn-outline-danger" href="{{ url_for('logout') }}"
+            >Выйти</a
+          >
+        </div>
+      </div>
+
+      <hr />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="p-3">
+            <h6>Активность</h6>
+            <p class="small-muted">Пока пусто — это обучающий шаблон.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-3">
+            <h6>Советы по безопасности</h6>
+            <p class="small-muted">
+            :)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

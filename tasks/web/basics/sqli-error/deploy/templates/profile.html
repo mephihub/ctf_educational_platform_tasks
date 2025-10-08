@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-pleasant p-4">
+      <h4>Профиль — {{ user.username }}</h4>
+      <p class="small-muted">
+      :)
+      </p>
+      <dl class="row">
+        <dt class="col-sm-3">Имя</dt>
+        <dd class="col-sm-9">{{ user.username }}</dd>
+        <dt class="col-sm-3">ID</dt>
+        <dd class="col-sm-9">{{ user.id }}</dd>
+      </dl>
+      <a class="btn btn-accent" href="{{ url_for('dashboard') }}"
+        >Вернуться в панель</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

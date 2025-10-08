@@ -4,7 +4,7 @@ services:
   idor:
     build: .
     ports:
-      - "4003:5000"
+      - "4001:5000"
     volumes:
       - ./data:/app/data
     environment:
