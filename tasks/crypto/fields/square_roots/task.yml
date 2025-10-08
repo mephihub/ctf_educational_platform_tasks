@@ -5,4 +5,5 @@ description:
 host-data:
   type: remote
   flag: flag{39028fa82b2a6bc9e1fcc1f5e3811e59}
+  timeout: 60000
   

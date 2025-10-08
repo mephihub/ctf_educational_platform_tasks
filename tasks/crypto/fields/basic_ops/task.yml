@@ -5,4 +5,4 @@ description:
 host-data:
   type: local
   flag: flag{571548d9a7d2705fb2fcd27655c42050}
-  
+  timeout: 60000
