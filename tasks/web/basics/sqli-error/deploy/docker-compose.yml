@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
@@ -11,6 +9,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init_db.py:/docker-entrypoint-initdb.d/init_db.py
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
     restart: unless-stopped
 
   sqli-error:
@@ -21,6 +22,9 @@ services:
       - db
     environment:
       - FLASK_ENV=production
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/"]
