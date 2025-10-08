@@ -6,3 +6,7 @@ services:
     ports:
       - "50003:1337"
     restart: unless-stopped
+    container_name: basic_dlp
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1

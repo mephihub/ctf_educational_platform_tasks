@@ -6,3 +6,7 @@ services:
     ports:
       - "50005:1337"
     restart: unless-stopped
+    container_name: basic_equations
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
