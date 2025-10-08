@@ -1,6 +1,7 @@
 services:
   sqli-easy:
     build: .
+    container_name: sqli_easy_app
     ports:
       - "4001:5000"
     volumes:

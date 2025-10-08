@@ -1,6 +1,7 @@
 services:
   predict-token:
     build: .
+    container_name: predict_token_app
     ports:
       - "4006:5000"
     volumes:

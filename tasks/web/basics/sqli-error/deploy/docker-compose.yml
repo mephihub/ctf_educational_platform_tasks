@@ -1,6 +1,7 @@
 services:
   db:
     image: mysql:8.0
+    container_name: sqli_error_db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sqli_accounts
@@ -16,6 +17,7 @@ services:
 
   sqli-error:
     build: .
+    container_name: sqli_error_app
     ports:
       - "4009:5000"
     depends_on:

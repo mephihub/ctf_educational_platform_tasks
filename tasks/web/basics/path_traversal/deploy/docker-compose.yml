@@ -1,6 +1,7 @@
 services:
   path-traversal:
     build: .
+    container_name: path_traversal_app
     ports:
       - "4005:5000"
     volumes:

@@ -1,6 +1,7 @@
 services:
   ssrf:
     build: .
+    container_name: ssrf_app
     ports:
       - "4008:5000"
     volumes:

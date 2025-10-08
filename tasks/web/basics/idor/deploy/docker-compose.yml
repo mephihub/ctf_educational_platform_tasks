@@ -1,8 +1,9 @@
 services:
   idor:
     build: .
+    container_name: idor_app
     ports:
-      - "4001:5000"
+      - "4003:5000"
     volumes:
       - ./data:/app/data
     environment:

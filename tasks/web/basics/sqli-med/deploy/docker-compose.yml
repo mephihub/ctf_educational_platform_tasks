@@ -1,6 +1,7 @@
 services:
   sqli-med:
     build: .
+    container_name: sqli_med_app
     ports:
       - "4002:5000"
     volumes:
