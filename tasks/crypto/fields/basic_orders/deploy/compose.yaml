@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  basic_orders:
+    build: .
+    ports:
+      - "50002:1337"
+    restart: unless-stopped

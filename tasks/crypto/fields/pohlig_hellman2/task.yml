@@ -1,0 +1,8 @@
+description:
+  difficulty: hard
+  name: Pohlig-Hellman-II
+  author: defkit
+host-data:
+  type: remote
+  flag: flag{cda7e1a9bacc6debf2afd444f9750353}
+  
