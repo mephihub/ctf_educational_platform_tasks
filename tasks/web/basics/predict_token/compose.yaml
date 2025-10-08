@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8088:5000"
+    environment:
+      FLASK_ENV: "production"
+      FLASK_SECRET: "change-me-to-secure-value"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import sqlite3; sqlite3.connect('idor_task.db').close()\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
