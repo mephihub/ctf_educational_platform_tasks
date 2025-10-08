@@ -8,7 +8,7 @@ BASE = Path(__file__).parent.resolve()
 DB_PATH = BASE / "ssrf_demo.db"
 
 app = Flask(__name__)
-app.secret_key = "3718b545b81cc41cb863bf6b97c695a8"
+app.secret_key = "secret"
 
 # ---- DB helpers ----
 def get_db():
@@ -122,7 +122,7 @@ def dashboard():
 def internal_flag():
     if request.remote_addr != "127.0.0.1":
         return "Access denied", 403
-    return "FLAG{ssrf_6ff78f39ca699311d0574ebb1af348bf}", 200
+    return "FLAG{test_flag}", 200
 
 # ---- Init DB if missing ----
 if not DB_PATH.exists():
