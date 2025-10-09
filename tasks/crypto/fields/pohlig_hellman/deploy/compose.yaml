@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  pohlig_hellman:
+    build: .
+    ports:
+      - "50004:1337"
+    restart: unless-stopped
+    container_name: pohlig_hellman
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1

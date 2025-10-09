@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  square_roots:
+    build: .
+    ports:
+      - "50000:1337"
+    restart: unless-stopped
+    container_name: square_roots
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1

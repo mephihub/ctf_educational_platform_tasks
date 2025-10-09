@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  basic_orders:
+    build: .
+    ports:
+      - "50002:1337"
+    restart: unless-stopped
+    container_name: basic_orders
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1

@@ -1,0 +1,9 @@
+description:
+  difficulty: easy
+  name: Basic Equations
+  author: defkit
+host-data:
+  type: remote
+  flag: flag{9864f9141704d86bcc8b814e51487b53}
+  timeout: 60000
+  

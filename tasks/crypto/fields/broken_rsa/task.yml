@@ -1,0 +1,8 @@
+description:
+  difficulty: medium
+  name: Broken RSA
+  author: defkit
+host-data:
+  type: local
+  flag: flag{b82f19dc7c74bba7d401ba5360ad8cdb}
+  timeout: 60000
