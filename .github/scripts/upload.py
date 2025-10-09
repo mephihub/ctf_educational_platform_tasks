@@ -46,12 +46,13 @@ class MCTFapi:
 
         return self.__do_post('courses/update', data=data)
 
-    def update_task(self, course_name, task_name, answer, info_path, writeup_path, description='', points=10):
+    def update_task(self, course_name, task_name, answer, difficulty, info_path, writeup_path, description='', points=10):
         data = {
             'course_name': course_name,
             'name': task_name,
             'description': description,
             'answer': answer,
+            'difficulty': difficulty,
             'points': points,
         }
 
@@ -109,6 +110,7 @@ def main():
                 course_name, 
                 task_yml['description']['name'], 
                 task_yml['host-data']['flag'], 
+                task_yml['description']['difficulty'],
                 f'{task_path.split('/task.yml')[0]}/DESCRIPTION.md',
                 f'{task_path.split('/task.yml')[0]}/solve/WRITEUP.md',
                 'No description provided'
