@@ -97,7 +97,7 @@ def main():
         course_name = course_yml['description']['name']
 
         print(f'Updating course {course_name}')
-        api.update_course(course_name, 'No description provided', 'Unknown difficulty')
+        api.update_course(course_name, course_yml['description']['difficulty'], 'Unknown difficulty')
 
         tasks = list(glob.glob(f'{str(course_yml_path).split('/topic.yml')[0]}/*/task.yml'))
         print(tasks)
