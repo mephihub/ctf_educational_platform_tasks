@@ -28,4 +28,4 @@ jobs:
           pip install pyyaml requests
 
       - name: Upload
-        run: python3 upload.py --url https://ctf.itsover.ru --api-key ${{ secrets.WEB_API_KEY }}
+        run: python3 .github/scripts/upload.py --url https://ctf.itsover.ru --api-key ${{ secrets.WEB_API_KEY }}
