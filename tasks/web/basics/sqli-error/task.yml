@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: SQL-Error
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{error_based_account_2025}

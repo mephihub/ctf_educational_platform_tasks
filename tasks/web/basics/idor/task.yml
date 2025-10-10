@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: IDOR
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{idor_simple_2025_d99dbdd7f9837d8d254385694f1c136c}

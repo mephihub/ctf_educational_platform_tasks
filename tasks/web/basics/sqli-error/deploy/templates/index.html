@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="hero d-flex align-items-center">
+      <div>
+        <h1 class="mb-1">Добро пожаловать в MyAccount</h1>
+        <p class="small-muted mb-3">
+        Войдите и попробуйте
+        </p>
+        <a href="{{ url_for('register') }}" class="btn btn-accent me-2"
+          >Зарегистрироваться</a
+        >
+        <a href="{{ url_for('login') }}" class="btn btn-outline-secondary"
+          >Войти</a
+        >
+      </div>
+    </div>
+
+    <div class="card card-pleasant p-4">
+      <h5>Обзор</h5>
+      <p class="small-muted">
+        Задача демонстрирует уязвимость SQL injection.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

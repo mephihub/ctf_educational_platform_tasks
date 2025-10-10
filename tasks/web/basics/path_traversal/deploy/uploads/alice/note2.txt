@@ -1,0 +1,4 @@
+Hello alice!
+This is your file note2.txt.
+Owner: alice
+UserID: 1

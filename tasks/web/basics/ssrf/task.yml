@@ -1,0 +1,8 @@
+description:
+  difficulty: easy 
+  name: SSRF
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{ssrf_6ff78f39ca699311d0574ebb1af348bf}

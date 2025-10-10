@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-pleasant p-4">
+      <h4 class="mb-3">Создать аккаунт</h4>
+      <form id="regForm" method="post" action="{{ url_for('register') }}">
+        <div class="mb-3">
+          <label class="form-label">Имя пользователя</label>
+          <input
+            name="username"
+            class="form-control"
+            required
+            placeholder="username"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Пароль</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            required
+            placeholder="••••••"
+          />
+        </div>
+        <button class="btn btn-accent w-100" type="submit">
+          Зарегистрироваться
+        </button>
+      </form>
+
+      <div id="result" class="mt-3" style="display: none"></div>
+
+      <div class="mt-3 small-muted">
+          ):
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("regForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const fd = new FormData(this);
+      const resp = await fetch(this.action, { method: "POST", body: fd });
+      const json = await resp.json();
+      const r = document.getElementById("result");
+      r.style.display = "block";
+      if (json.success) {
+        r.innerHTML =
+          '<div class="alert alert-success">Успешно зарегистрированы — вы можете войти.</div>';
+      } else {
+        r.innerHTML =
+          '<div class="alert alert-danger"><strong>Ошибка:</strong><br><pre style="white-space:pre-wrap;">' +
+          (json.error || "Unknown") +
+          "</pre></div>";
+      }
+    });
+</script>
+{% endblock %}

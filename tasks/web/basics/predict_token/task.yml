@@ -1,0 +1,8 @@
+description:
+  difficulty: easy 
+  name: Predict-Token
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{predictable_token_bypass_2025_4f86e2e696f71cc4e1a8966a32c2812e}

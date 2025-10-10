@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card card-soft p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="mb-1">Welcome to RealSite</h1>
+          <p class="small-muted mb-0">
+            Modern demo site — sign up, log in, and check your dashboard.
+          </p>
+        </div>
+        <div>
+          <a class="btn btn-accent" href="{{ url_for('register') }}"
+            >Get started</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-soft p-4">
+      <h5>About</h5>
+      <p class="small-muted">
+        This is a minimal realistic flow: sign up or log in, obtain an API
+        token, and your dashboard will request profile data from the API.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

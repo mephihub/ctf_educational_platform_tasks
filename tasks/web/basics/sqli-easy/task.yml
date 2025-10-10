@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: SQL-easy
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: flag{sql_injection_2025_easy_c1b885c48db640258ac9452035019121}

@@ -1,0 +1,8 @@
+description:
+  difficulty: medium
+  name: SQL-Medium
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{sql_injection_2025_3534767cb3c73ff87e26fb688b41797f}

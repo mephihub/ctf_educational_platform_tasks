@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card card-soft p-4 mb-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3 id="greet">Hello</h3>
+          <p class="small-muted mb-0">
+            Your profile data will load from the API.
+          </p>
+        </div>
+        <div>
+          <button id="logout" class="btn btn-outline-danger btn-sm">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-soft p-4">
+      <h5>Profile</h5>
+      <div id="profile" class="mb-3">
+        <div class="small-muted">Loading…</div>
+      </div>
+      <h6>Raw API response</h6>
+      <pre id="apiout" class="api-out">waiting for token…</pre>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showProfile(obj) {
+    const profile = document.getElementById("profile");
+    const greet = document.getElementById("greet");
+    if (obj.error) {
+      profile.innerHTML =
+        '<div class="alert alert-danger">API error: ' + obj.error + "</div>";
+      greet.textContent = "Hello";
+      document.getElementById("apiout").textContent = JSON.stringify(
+        obj,
+        null,
+        2,
+      );
+      return;
+    }
+    greet.textContent = "Welcome, " + (obj.display_name || obj.username) + ". P.S. admin has the flag";
+    profile.innerHTML = `
+    <dl class="row">
+      <dt class="col-sm-3">Username</dt><dd class="col-sm-9">${obj.username}</dd>
+      <dt class="col-sm-3">Display</dt><dd class="col-sm-9">${obj.display_name || ""}</dd>
+      <dt class="col-sm-3">ID</dt><dd class="col-sm-9">${obj.id}</dd>
+    </dl>
+  `;
+    document.getElementById("apiout").textContent = JSON.stringify(
+      obj,
+      null,
+      2,
+    );
+  }
+
+  async function callApiWithToken(token) {
+    const headers = token ? { Authorization: "Bearer " + token } : {};
+    try {
+      const r = await fetch("/api/me", { headers });
+      const j = await r.json();
+      showProfile(j);
+    } catch (e) {
+      showProfile({ error: e.toString() });
+    }
+  }
+
+  document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("api_token");
+    location.href = "/";
+  });
+
+  // on load, read token and call API
+  (function () {
+    const token = localStorage.getItem("api_token");
+    if (!token) {
+      document.getElementById("profile").innerHTML =
+        '<div class="alert alert-warning">No token found. Please <a href="/login">login</a> or <a href="/register">register</a>.</div>';
+      document.getElementById("apiout").textContent = "";
+      return;
+    }
+    callApiWithToken(token);
+  })();
+</script>
+{% endblock %}
