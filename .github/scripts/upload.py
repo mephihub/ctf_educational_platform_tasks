@@ -1,8 +1,11 @@
 import argparse
+import io
 import requests
 import yaml
 from pathlib import Path
 import glob
+import tarfile
+import os
 
 
 class MCTFapi:
@@ -22,21 +25,21 @@ class MCTFapi:
         try:
             return self.session.get(f'{self.url}/api/v1/{endpoint}')
         except:
-            print(f'Couldnt connect to {self.url}')
+            print(f'Couldnt connect to {self.url} or unhandled exception occured')
             exit(1)
 
     def __do_post(self, endpoint, data=None, files=None):
         try:
             return self.session.post(f'{self.url}/api/v1/{endpoint}', data=data, files=files)
         except:
-            print(f'Couldnt connect to {self.url}')
+            print(f'Couldnt connect to {self.url} or unhandled exception occured')
             exit(1)
 
     def __ping(self):
         r = self.__do_get('')
         return r.status_code
 
-    def update_course(self, name, description='', difficulty='', estimated_completion_time=0):
+    def update_course(self, name, description='No description provided', difficulty='Unknown', estimated_completion_time=0):
         data = {
             'name': name,
             'description': description,
@@ -46,7 +49,7 @@ class MCTFapi:
 
         return self.__do_post('courses/update', data=data)
 
-    def update_task(self, course_name, task_name, answer, difficulty, info_path, writeup_path, description='', points=10):
+    def update_task(self, course_name, task_name, answer, difficulty, info_path, writeup_path, attachments=None, description='No description provided', points=10):
         data = {
             'course_name': course_name,
             'name': task_name,
@@ -57,10 +60,14 @@ class MCTFapi:
         }
 
         with open(info_path, 'rb') as info_file, open(writeup_path, 'rb') as writeup_file:
-            files = {
-                'info': ('info.md', info_file, 'text/markdown'),
-                'writeup': ('writeup.md', writeup_file, 'text/markdown'),
-            }
+            files = [
+                ('info', ('info.md', info_file, 'text/markdown')),
+                ('writeup', ('writeup.md', writeup_file, 'text/markdown')),
+            ]
+            if attachments is not None:
+                for i in attachments:
+                    files.append(('files', i))
+
             return self.__do_post('tasks/update', data=data, files=files)
 
 
@@ -101,14 +108,21 @@ def main():
             course_name,
             description='No description provided',
             difficulty=course_yml['description']['difficulty'],
-            estimated_completion_time=0
         )
 
         tasks = list(glob.glob(f'{str(course_yml_path).split('/topic.yml')[0]}/*/task.yml'))
         print(tasks)
-        for task_path in tasks:
-            with open(task_path, 'r') as f:
+        for task_yml_path in tasks:
+            with open(task_yml_path, 'r') as f:
                 task_yml = yaml.safe_load(f)
+
+            task_path = task_yml_path.split('/task.yml')[0]
+            public_path = f'{task_path}/public'
+
+            buf = io.BytesIO()
+            with tarfile.open(fileobj=buf, mode='w:gz') as tar:
+                tar.add(public_path, task_yml['description']['name'])
+            buf.seek(0)
 
             print(f'Updating task {task_yml['description']['name']}')
             api.update_task(
@@ -116,9 +130,9 @@ def main():
                 task_yml['description']['name'], 
                 task_yml['host-data']['flag'], 
                 task_yml['description']['difficulty'],
-                f'{task_path.split('/task.yml')[0]}/DESCRIPTION.md',
-                f'{task_path.split('/task.yml')[0]}/solve/WRITEUP.md',
-                'No description provided'
+                f'{task_path}/DESCRIPTION.md',
+                f'{task_path}/solve/WRITEUP.md',
+                [('files.tar.gz', buf.getvalue(), 'application/gzip') if len(os.listdir(public_path)) != 0 else None]
             )
 
 
