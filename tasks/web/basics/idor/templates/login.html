@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card card-soft p-4">
+      <h4 class="mb-3">Войти</h4>
+      <form method="post" action="{{ url_for('login') }}">
+        <div class="mb-3">
+          <label class="form-label">Имя пользователя</label>
+          <input name="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Пароль</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            required
+          />
+        </div>
+        <button class="btn btn-accent w-100" type="submit">Войти</button>
+      </form>
+      <div class="mt-3 small-muted">
+        Тестовые пользователи: <code>user1..user10</code>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

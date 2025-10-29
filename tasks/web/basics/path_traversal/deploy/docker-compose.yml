@@ -1,0 +1,21 @@
+services:
+  path-traversal:
+    build: .
+    container_name: path_traversal_app
+    ports:
+      - "4005:5000"
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+    environment:
+      - FLASK_ENV=production
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

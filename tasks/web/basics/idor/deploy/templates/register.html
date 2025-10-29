@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-soft p-4">
+      <h4 class="mb-3">Создать аккаунт</h4>
+      <form method="post" action="{{ url_for('register') }}">
+        <div class="mb-3">
+          <label class="form-label">Имя пользователя</label>
+          <input
+            name="username"
+            class="form-control"
+            required
+            placeholder="например alice"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Пароль</label>
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            required
+            placeholder="••••••"
+          />
+        </div>
+        <button class="btn btn-accent w-100" type="submit">
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

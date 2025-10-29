@@ -1,0 +1,8 @@
+description:
+  difficulty: medium
+  name: NoSQL-Injection
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: CTF{n0sql_1nj3ct10n_m4st3r}

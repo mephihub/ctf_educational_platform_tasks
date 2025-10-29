@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card card-soft p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="mb-1">IDOR Challenge</h1>
+          <p class="small-muted mb-0">
+          :)
+          </p>
+        </div>
+        <div>
+          <a class="btn btn-accent" href="{{ url_for('register') }}"
+            >Попробовать</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-soft p-4">
+      <h5>Как играть</h5>
+      <ol>
+        <li>Зарегистрируйся / войди как обычный пользователь.</li>
+        <li>Открой личный кабинет — увидишь свои документы.</li>
+      </ol>
+      <p class="small-muted mb-0">
+        Подсказка: флаг хранится в документе одного из пользователей.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

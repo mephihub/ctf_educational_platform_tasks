@@ -1,0 +1,8 @@
+description:
+  difficulty: easy
+  name: Path-Traversal
+  author: j015.3
+host-data:
+  type: remote
+  timeout: 120000
+  flag: FLAG{path_traversal_5d6198f04b150a812762f3c47b513ce3}

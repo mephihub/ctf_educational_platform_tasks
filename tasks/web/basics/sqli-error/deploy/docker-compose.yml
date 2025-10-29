@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: sqli_error_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sqli_accounts
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init_db.py:/docker-entrypoint-initdb.d/init_db.py
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
+    restart: unless-stopped
+
+  sqli-error:
+    build: .
+    container_name: sqli_error_app
+    ports:
+      - "4009:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=production
+    pids_limit: 128
+    mem_limit: 128M
+    cpus: 1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mysql_data:
